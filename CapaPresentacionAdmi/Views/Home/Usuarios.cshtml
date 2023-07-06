@@ -1,0 +1,309 @@
+﻿
+@{
+    ViewBag.Title = "Usuarios";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<ol class="breadcrumb mb-4 mt-4">
+    <li class="breadcrumb-item"><a href="index.html">Resumen</a></li>
+    <li class="breadcrumb-item active">Usuarios</li>
+</ol>
+
+<div class="card">
+
+    <div class="card-header">
+        <i class="fas fa-user me-1"></i>Lista de Usuario
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-12">
+                <button type="button" class="btn btn-outline-success mb-3" onclick="AbrirModal(null)">Crear Nuevo Usuario</button>
+            </div>
+        </div>
+        <table id="tabla" class="display cell-border mt-4" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Nombres</th>
+                    <th>Apellidos</th>
+                    <th>Correos</th>
+                    <th>Activos</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="FormModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static" >
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-dark text-white" >
+                <h5 class="modal-title" id="exampleModalLabel">USUARIO</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <input type="text" id="txtid" value="0" />
+
+                <div class="col-12 mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Nombres</label>
+                    <input type="text" class="form-control" id="textnombres" autocomplete="off" placeholder="escriba aqui">
+                </div>
+                <div class="col-12  mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Apellidos</label>
+                    <input type="text" class="form-control" id="textapellidos" autocomplete="off" placeholder="escriba aqui">
+                </div>
+                <div class="col-12  mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Correo</label>
+                    <input type="email" class="form-control" id="textcorreo"autocomplete="off" placeholder="name@example.com">
+                </div>
+                    <label for="cboestado" class="form-label">Estado</label>
+                    <select class="form-select mb-3" id="cboestado">
+                        <option value="1">Activo</option>
+                        <option value="0">Inactivo</option>
+                    </select>
+                    <div class="row mt-3">
+                        <div class=" col-12">
+                            <div id="mensajeError" class="alert alert-danger" role="alert">
+                                ocurrio un error!!!
+                            </div>
+                        </div>
+                    </div>
+             </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" onclick="Guardar()">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+@*esto permitirá traer los datos del HOME con los datos de la lista creada y
+    de la base de datos*@
+@section scripts{
+    <script>
+        var tabladata;
+        let filaseleccionada;
+        /*se utilizara el metodo AJAX para poder obteber los datos de la lista
+         se tiene que especificar el tipo de dato que se es pecifica en el
+         datatype y content-type de lo contrario fallara la respuesta HTTP*/
+
+        //ESTA PARTE NO ES NECESARIA PUEDE FUNCIONAR SIN ESTO SOLO ES PARA
+        //PODER ENTENDER
+        jQuery.ajax(
+            {
+                url: '@Url.Action("Listar_Usuarios","Home")',
+                type: "GET",
+                dataType: "json",
+                contentType: "application/json; chartset=utf-8",
+                success: function (data) {
+                    console.log(data);
+                }
+            }
+        );
+                 //se crea una datetable con el pluggin instalado del paquete de nugget
+
+            tabladata = $("#tabla").DataTable(
+            {
+                responsive: true,
+                ordering: false,
+                "ajax": {
+                    url: '@Url.Action("Listar_Usuarios","Home")',
+                    type: "GET",
+                    dataType: "json"
+                },
+                /*las columnas deben existir en la tabla precreada para poder ser llamados
+                al convertirlos en un DataTable*/
+                // en las columnas se rellenan con los datos llamados de la lista
+                //Listar_Usuario() con las propiedades de la clase Usuario
+                "columns": [
+                    { "data": "Nombre" },
+                    { "data": "Apellido" },
+                    { "data": "Correo" },
+                    {
+                        "data": "Activo", "render": function (valor) {
+                            if (valor==1) {
+
+                                return '<span class="badge bg-success">SI</span>'
+                            } else {
+                                return '<span class="badge bg-danger">NO</span>'
+                            }
+                        }
+                    },
+                    {
+                        "defaultContent": '<button type="button" class="btn btn-outline-primary btn-sm btn-editar"><i class="fas fa-pen"></i></button>' +
+                            '<button type="button" class="btn btn-outline-danger btn-sm ms-2 btn-eliminar"><i class="fas fa-trash"></i></button>',
+                        "orderable": false,
+                        "searchable": false,
+                        "width":'70px'
+                    }
+                ],
+                //para cambiar el lenguaje a español
+                "language": { "url":"//cdn.datatables.net/plug-ins/1.13.2/i18n/es-ES.json"}
+             });
+
+
+
+            // funcion para abrir el modal(formulario) y escribir los datos
+        function AbrirModal(json) {
+
+            //como se llama a la funcion AbrirModal(null)se limpiara y no mostrara nada
+            $("#txtid").val(0)
+            $("#textnombres").val("")
+            $("#textapellidos").val("")
+            $("#textcorreo").val("")
+            $("#cboestado").val("")
+            $("#mensajeError").hide()
+
+            if (json != null) {
+
+
+                //aqui se pasan los valores que se encuentran en los atributos de la clase
+                //Usuario
+                $("#txtid").val(json.IdUsuario)
+                $("#textnombres").val(json.Nombre)
+                $("#textapellidos").val(json.Apellido)
+                $("#textcorreo").val(json.Correo)
+                $("#cboestado").val(json.Activo==true ? 1:0)
+            }
+
+            $("#FormModal").modal("show");
+
+        }
+
+
+        //para poder añadir funcionalidad aL boton EDITAR-MODIFICAR
+
+        $("#tabla tbody").on("click", '.btn-editar', function () {
+
+            filaseleccionada = $(this).closest("tr");
+
+            var data = tabladata.row(filaseleccionada).data()
+
+            console.log(data);
+            AbrirModal(data);
+        });
+
+        // utilizando la libreria sweet for bootstrap
+        $("#tabla tbody").on("click", '.btn-eliminar', function () {
+
+            usuarioseleccionada = $(this).closest("tr");
+
+            var data = tabladata.row(usuarioseleccionada).data()
+
+            // se llamará a la animación 
+            swal
+            (  {
+
+                title: "Estas Seguro?",
+                text: "No se podrá recuperar al Usuario",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonClass: "btn-danger",
+                confirmButtonText: "Eliminar",
+                cancelButtonText: "Cancelar",
+                closeOnConfirm: false
+               },
+                function ()
+                {
+                    swal("Eliminado!", "El usuario ha sido eleminado", "success");
+                }
+            );
+            console.log(data);
+           
+        });
+        
+
+        function Guardar()
+        {
+            var Usuario =
+            {
+                IdUsuario: $("#txtid").val(),
+                Nombre: $("#textnombres").val(),
+                Apellido: $("#textapellidos").val(),
+                Activo: $("#cboestado").val() == true ? 1 : 0,
+                Correo: $("#textcorreo").val()
+
+            }
+            jQuery.ajax
+            (
+                {
+                // para hacer llamado a nuestros metodos en el homecontroller
+
+                    url: '@Url.Action("Guardar_Usuarios", "Home")',
+                    type: "POST",
+                    //" JSON.stringify "convierte en texto lo que le enviamos en "objeto"(de Homecontroller tal cual esta) a "Usuario" creado
+                    //anteriormente 
+                    data: JSON.stringify({ objeto : Usuario }),
+                    dataType: "json",
+                    contentType: "application/json; chartset=utf-8",
+                    // "data" es lo que contiene todo al traerlo desde home
+                    // cuando la operacion ha sido existosa
+                    success: function (data) {
+
+                        // cerrará el scrip de animacion cargando...
+
+                        $(".modal-body").LoadingOverlay("show");
+
+                        //Usuario Nuevo con el valor default de 0 en la caja de texto al escribir datos
+                        if (Usuario.IdUsuario == 0) {
+                            // primero se escribirá en la bse de datos y sus verificaciones respectivas
+                            // luego traerá el valor en resulatdo(id del usuario)
+                            if (data.resultado != 0) {
+                                Usuario.IdUsuario = data.resultado;
+                                tabladata.row.add(Usuario).draw(false)
+                                $("#FormModal").modal("hide");
+                            }
+                            else {
+                                $(".modal-body").LoadingOverlay("hide");
+                                $("#mensajeError").text(data.mensaje);
+                                $("#mensajeError").show();
+                            }
+                        }
+                        else {
+                            if (data.resultado) {
+                                tabladata.row(filaseleccionada).data(Usuario).draw(false);
+                                $("#FormModal").modal("hide");
+                            }
+                            else {
+                                $("#FormModal").modal("hide");
+                                $("#FormModal").modal("show");
+
+                            }
+                        }
+                    },
+                    // si hubo algun problema en la depuración
+                    error: function (error)
+                    {
+                        $("#FormModal").modal("hide");
+                        $("#FormModal").modal("show");
+
+                    },
+
+                    // acciones que se van a ejecutar antes y durentae  la consulta de ajax
+
+                    beforeSend: function ()
+                    {
+                        // esto llamará al script de loading  y mostrará la animacion cargando...
+                        //dentro del body
+                        $(".modal-body").LoadingOverlay("show", {
+                            imageResizeFactor: 2,
+                            text: "Cargando...",
+                            size:14
+                        })
+                
+                    }
+                }
+            );
+
+        }
+
+    </script>
+}
