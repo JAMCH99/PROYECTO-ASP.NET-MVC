@@ -9,3 +9,14 @@ C:\Users\HP\source\repos\PROYECTO-1\CapaNegocio\obj\Debug\CapaNegocio.pdb
 C:\Users\HP\source\repos\PROYECTO-1\CapaNegocio\bin\Debug\CapaEntidad.dll
 C:\Users\HP\source\repos\PROYECTO-1\CapaNegocio\bin\Debug\CapaEntidad.pdb
 C:\Users\HP\source\repos\PROYECTO-1\CapaNegocio\obj\Debug\CapaNegocio.csproj.CopyComplete
+D:\Documentos\SISTEMA_VENTAS MVC\CapaNegocio\bin\Debug\CapaNegocio.dll
+D:\Documentos\SISTEMA_VENTAS MVC\CapaNegocio\bin\Debug\CapaNegocio.pdb
+D:\Documentos\SISTEMA_VENTAS MVC\CapaNegocio\bin\Debug\Capadatos.dll
+D:\Documentos\SISTEMA_VENTAS MVC\CapaNegocio\bin\Debug\CapaEntidad.dll
+D:\Documentos\SISTEMA_VENTAS MVC\CapaNegocio\bin\Debug\Capadatos.pdb
+D:\Documentos\SISTEMA_VENTAS MVC\CapaNegocio\bin\Debug\CapaEntidad.pdb
+D:\Documentos\SISTEMA_VENTAS MVC\CapaNegocio\obj\Debug\CapaNegocio.csproj.AssemblyReference.cache
+D:\Documentos\SISTEMA_VENTAS MVC\CapaNegocio\obj\Debug\CapaNegocio.csproj.CoreCompileInputs.cache
+D:\Documentos\SISTEMA_VENTAS MVC\CapaNegocio\obj\Debug\CapaNegocio.csproj.CopyComplete
+D:\Documentos\SISTEMA_VENTAS MVC\CapaNegocio\obj\Debug\CapaNegocio.dll
+D:\Documentos\SISTEMA_VENTAS MVC\CapaNegocio\obj\Debug\CapaNegocio.pdb

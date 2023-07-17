@@ -38,7 +38,7 @@ namespace CapaNegocio
             if (string.IsNullOrEmpty(mensaje))
             {
                 string clave = "text 123";
-                obj.Clave = Resumen.Encriptacion(clave);
+                obj.Clave = Recursos.Encriptacion(clave);
                 return objcapadato_usuario.Registrar_Usuarios(obj, out mensaje);
             }
             else

@@ -7,3 +7,12 @@ C:\Users\HP\source\repos\PROYECTO-1\Capadatos\obj\Debug\Capadatos.pdb
 C:\Users\HP\source\repos\PROYECTO-1\Capadatos\bin\Debug\CapaEntidad.dll
 C:\Users\HP\source\repos\PROYECTO-1\Capadatos\bin\Debug\CapaEntidad.pdb
 C:\Users\HP\source\repos\PROYECTO-1\Capadatos\obj\Debug\Capadatos.csproj.CopyComplete
+D:\Documentos\SISTEMA_VENTAS MVC\Capadatos\bin\Debug\Capadatos.dll
+D:\Documentos\SISTEMA_VENTAS MVC\Capadatos\bin\Debug\Capadatos.pdb
+D:\Documentos\SISTEMA_VENTAS MVC\Capadatos\bin\Debug\CapaEntidad.dll
+D:\Documentos\SISTEMA_VENTAS MVC\Capadatos\bin\Debug\CapaEntidad.pdb
+D:\Documentos\SISTEMA_VENTAS MVC\Capadatos\obj\Debug\Capadatos.csproj.AssemblyReference.cache
+D:\Documentos\SISTEMA_VENTAS MVC\Capadatos\obj\Debug\Capadatos.csproj.CoreCompileInputs.cache
+D:\Documentos\SISTEMA_VENTAS MVC\Capadatos\obj\Debug\Capadatos.csproj.CopyComplete
+D:\Documentos\SISTEMA_VENTAS MVC\Capadatos\obj\Debug\Capadatos.dll
+D:\Documentos\SISTEMA_VENTAS MVC\Capadatos\obj\Debug\Capadatos.pdb

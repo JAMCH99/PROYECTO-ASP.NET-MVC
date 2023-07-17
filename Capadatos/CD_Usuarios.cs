@@ -140,7 +140,7 @@ namespace Capadatos
             {
                 using (SqlConnection oconexion = new SqlConnection(Conexion.cn))
                 {
-                    SqlCommand cmd = new SqlCommand("delete top(1) from USUARIO where IdUsuario=@Id");
+                    SqlCommand cmd = new SqlCommand("delete top(1) from USUARIO where IdUsuario=@Id",oconexion);
                     cmd.CommandType = CommandType.Text;
                     cmd.Parameters.AddWithValue("@id", id);
                     oconexion.Open();

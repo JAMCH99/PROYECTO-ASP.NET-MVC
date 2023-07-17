@@ -46,14 +46,19 @@ namespace CapaPresentacionAdmi.Controllers
             }
             return Json(new { resultado = resultado, mensaje= mensaje }, JsonRequestBehavior.AllowGet);
         }
+
+
         [HttpPost]
-        public JsonResult Eliminar_Usuarios(int idusuario ,out string mensaje)
+        
+        public JsonResult Eliminacion(int id)
         {
             bool resultado = false;
-            mensaje = string.Empty;
-             resultado = new CN_Usuarios().Eliminar(idusuario, out mensaje);
-            return Json(new { resultado = resultado, mensaje = mensaje }, JsonRequestBehavior.AllowGet);
-            
+            string mensaje = string.Empty;
+
+            resultado = new CN_Usuarios().Eliminar(id,out mensaje);
+
+            return Json(new {resultado= resultado,mensaje=mensaje },JsonRequestBehavior.AllowGet);
+
         }
     }
 }

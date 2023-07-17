@@ -4,3 +4,8 @@ C:\Users\HP\source\repos\PROYECTO-1\Entidad\obj\Debug\Entidad.csproj.AssemblyRef
 C:\Users\HP\source\repos\PROYECTO-1\Entidad\obj\Debug\Entidad.csproj.CoreCompileInputs.cache
 C:\Users\HP\source\repos\PROYECTO-1\Entidad\obj\Debug\CapaEntidad.dll
 C:\Users\HP\source\repos\PROYECTO-1\Entidad\obj\Debug\CapaEntidad.pdb
+D:\Documentos\SISTEMA_VENTAS MVC\Entidad\bin\Debug\CapaEntidad.dll
+D:\Documentos\SISTEMA_VENTAS MVC\Entidad\bin\Debug\CapaEntidad.pdb
+D:\Documentos\SISTEMA_VENTAS MVC\Entidad\obj\Debug\Entidad.csproj.CoreCompileInputs.cache
+D:\Documentos\SISTEMA_VENTAS MVC\Entidad\obj\Debug\CapaEntidad.dll
+D:\Documentos\SISTEMA_VENTAS MVC\Entidad\obj\Debug\CapaEntidad.pdb
