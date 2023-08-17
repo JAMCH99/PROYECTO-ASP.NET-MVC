@@ -24,7 +24,7 @@ namespace Entidad
             set { descripcion = value; }
         }
 
-        public bool Activo { get; set; }
+        public bool Estado { get; set; }
 
     }
 }

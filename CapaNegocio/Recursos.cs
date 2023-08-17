@@ -45,8 +45,9 @@ namespace CapaNegocio
 
         // Metodo para enviar correos 
 
-        public static bool EnviarCorreos(string correo,string asunto,string mensaje)
+        public static bool EnviarCorreo(string correo,string asunto,string mensaje, out string men)
         {
+            men = null;
             bool respuesta = false;
 
             try
@@ -54,16 +55,19 @@ namespace CapaNegocio
                 //  creacion del correo
 
                 MailMessage mail = new MailMessage();
-                mail.From = new MailAddress("pruebas.sitemas99gmail.com");
+                mail.To.Add(correo);
+                mail.From = new MailAddress("pruebas.sistemas99@gmail.com");
                 mail.Subject = asunto;
                 mail.Body = mensaje;
                 mail.IsBodyHtml = true;
 
                 // creando nuestro servidor encargado de enviar nuestro mensaje
+                // será el que envia 
 
                 var smtp = new SmtpClient()
                 {
-                    Credentials = new NetworkCredential("pruebas.sitemas99gmail.com", "pruebas123@"),
+                    // el correo remitente debe estar autenticada comom el siguiente correo de prueba
+                    Credentials = new NetworkCredential("pruebas.sistemas99@gmail.com", "nmisqtgautfpocsj"),
                     //servidor que utiliza gmail
                     Host = "smtp.gmail.com",
                     // puerto que utiliza 
@@ -72,12 +76,11 @@ namespace CapaNegocio
                     EnableSsl = true
                 };
 
-            }
-            catch (Exception ex)
-            {
+                smtp.Send(mail);
+                respuesta = true;
 
-                throw;
             }
+            catch(Exception ex){ respuesta = false;  men = ex.Message; }
 
             return respuesta;
         }
